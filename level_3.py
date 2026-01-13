@@ -21,7 +21,7 @@ def get_music_path(filename, subfolder="sounds"):
 class Level_3(oa.View):
 
     def on_create(self):
-        self.background = oa.Sprite(1500, 1000, get_asset_path("XP.png"), layer=cc.Layers.BACKGROUND) # the Background
+        self.background = oa.Sprite(4000, 1900, get_asset_path("XP.png"), layer=cc.Layers.BACKGROUND, scale=2) # the Background
         self.items_collected = 0 # set the collectde items vabl to 0
         # ===============================
         # Randomly choise the BGM and play the music
@@ -65,7 +65,7 @@ class Level_3(oa.View):
         # =============================================
     def on_step(self):
         # Make the camera follow the player
-        self.world_camera.center_on_sprite(self.player, left_bound=0, lower_bound=-0, right_bound=20000, upper_bound=88000)
+        self.world_camera.center_on_sprite(self.player, left_bound=0, lower_bound=-0, right_bound=8000, upper_bound=3950)
         self.world_camera.use()
 
         self.clear()
