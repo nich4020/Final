@@ -5,7 +5,7 @@ import op_arcade.constants_classes as cc
 from op_arcade import refs # refs gives us access to the current level
 from arcade import Sound
 import os 
-def get_asset_path(filename, subfolder="assets"):
+def get_asset_path(filename, subfolder="images"):
         base = os.path.dirname(__file__)  # folder where your script lives
         return os.path.join(base, subfolder, filename)
 class Player(oa.Sprite):
@@ -109,7 +109,7 @@ class Fly(oa.Sprite):
 
     def on_create(self):
         # Set built-in attributes
-        self.visual = "anims/buddy.png" #"anims/buddy.yml"
+        self.visual = get_asset_path("buddy.png")
         # cc.Images.Enemies.FLY
         self.layer = cc.Layers.MOVING_GAME_OBJECTS
         self.scale = 0.5
@@ -130,14 +130,14 @@ class Fly(oa.Sprite):
         
         if self.change_x > 0:
             if self.change_y > self.change_x:
-                self.visual = "anims/buddy_up.png"
+                self.visual = get_asset_path("buddy_up.png")
             elif self.change_y < -self.change_x:    
-                self.visual = "anims/buddy_down.png"
+                self.visual = get_asset_path("buddy_down.png")
             else:
-                self.visual = "anims/buddy.png"
+                self.visual = get_asset_path("buddy.png")
     
         else:
-            self.visual = "anims/buddy_sit.png"              
+            self.visual = get_asset_path("buddy_sit.png")              
         
         
         # Set the fly's movement according to its current state
@@ -150,7 +150,7 @@ class Fly(oa.Sprite):
         # Check if the fly has collided with the plyaer
         colliding_player = self.find_colliding(Player)
         if colliding_player:
-            colliding_player.take_damage(2)
+            # colliding_player.take_damage(2)
             self.movement_state = "retreat"
             oa.set_timer(3, self.reset_movement_state)
         
