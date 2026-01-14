@@ -252,3 +252,4 @@ class vista_orb(oa.Sprite):
             self.kill() 
         # # refs.cur_view.world_camera.point_in_view(int(self.x), int(self.y)) == False:
         #     self.kill()
+class 
