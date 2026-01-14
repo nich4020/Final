@@ -14,7 +14,7 @@ class Player(oa.Sprite):
 
     def on_create(self):
         # Set built-in attributes and called required methods
-        self.visual = "images/duck.png"
+        self.visual = get_asset_path("duck.png")
         # cc.Anims.Players.TopDown.GIRL
         self.scale = 2
         self.set_layer(cc.Layers.MOVING_GAME_OBJECTS)
@@ -104,7 +104,7 @@ class BlueBird(oa.Sprite):
             self.kill()
 
 ## Fly Enemy
-class Fly(oa.Sprite):
+class dog(oa.Sprite):
     SPEED = 3
 
     def on_create(self):
@@ -142,10 +142,10 @@ class Fly(oa.Sprite):
         
         # Set the fly's movement according to its current state
         if self.movement_state == "towards player":
-            self.move_towards_xy(self.view.player.x, self.view.player.y, Fly.SPEED)
+            self.move_towards_xy(self.view.player.x, self.view.player.y, dog.SPEED)
         elif self.movement_state == "retreat":
-            self.change_x = -Fly.SPEED
-            self.change_y = Fly.SPEED
+            self.change_x = -dog.SPEED
+            self.change_y = dog.SPEED
 
         # Check if the fly has collided with the plyaer
         colliding_player = self.find_colliding(Player)
@@ -155,7 +155,7 @@ class Fly(oa.Sprite):
             oa.set_timer(3, self.reset_movement_state)
         
         # Check if an arrow has collided with us
-        if self.has_collision_with(Arrow):
+        if self.has_collision_with(bliss):
             self.kill()
         if self.has_collision_with(err):
             self.kill()
@@ -179,7 +179,7 @@ class buddy(oa.Sprite):
         self.layer = cc.Layers.MOVING_GAME_OBJECTS
         self.scale = 0.5
 
-class Arrow(oa.Sprite):
+class bliss(oa.Sprite):
     SPEED = 10
 
     def on_create(self):
@@ -232,7 +232,7 @@ class err(oa.Sprite):
         if dir == "down":
             self.change_y = -Arrow.SPEED
             self.angle = 270
-class FireBall(oa.Sprite):
+class vista_orb(oa.Sprite):
 
     def on_create(self):
         Windowsvista = "images/Windows_Vista.jpg" 
@@ -240,8 +240,8 @@ class FireBall(oa.Sprite):
         self.scale = 0.5
         self.layer = cc.Layers.MOVING_GAME_OBJECTS
         self.change_x = 8
-        FireBall_sOUND = arcade.load_sound("Local/Unit 4/part1/sounds/Windows Shutdown.wav")
-        FireBall_sOUND = arcade.play_sound(FireBall_sOUND)
+        vista_orb_sOUND = arcade.load_sound("Local/Unit 4/part1/sounds/Windows Shutdown.wav")
+        vista_orb_play = arcade.play_sound(vista_orb_sOUND)
 
 
     def on_step(self):

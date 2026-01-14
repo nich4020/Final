@@ -6,7 +6,7 @@ import arcade
 from arcade import Sound
 
 from level_base import LevelBase
-from sprites import  Fly, BlueBird, Coin, FireBall
+from sprites import  dog, BlueBird, Coin, vista_orb
 
 # =====================================
 # get the file locaion to ware to find it
@@ -23,15 +23,14 @@ class Level_3(oa.View):
 
 
     def on_create(self):
-        # self.background = 
-        oa.Sprite(4000, 1900, get_asset_path("XP.png"), layer=cc.Layers.BACKGROUND, scale=2) # the Background
+        self.background = oa.Sprite(4000, 1900, get_asset_path("XP.png"), layer=cc.Layers.BACKGROUND, scale=2) # the Background
         self.add_sf_map_layers("Maps/Untitled", scale=2)
-        self.add_default_layers()
+        # self.add_default_layers()
 
         self.items_collected = 0 # set the collectde items vabl to 0
         # ===============================
         # Randomly choise the BGM and play the music
-        bgm = random.choice([get_music_path("title.wma"), get_music_path("Wii sports resort music_ Main theme.mp3"), get_music_path("Nintendo Switch 2 Setup Music.m4a"), get_music_path("Training Menu_ Activity Selection - Wii Fit Soundtrack.mp3"), get_music_path("TV Channel Menu - TV Friend Channel.mp3"), get_music_path("Nintendo DSi Shop.m4a"), get_music_path("title.wma")])
+        bgm = random.choice([get_music_path("title.wma"), get_music_path("Wii sports resort music_ Main theme.mp3"), get_music_path("Nintendo Switch 2 Setup Music.m4a"), get_music_path("Training Menu_ Activity Selection - Wii Fit Soundtrack.mp3"), get_music_path("TV Channel Menu - TV Friend Channel.mp3"), get_music_path("Nintendo DSi Shop.m4a"), get_music_path("Friend List - Wii U Menu Music.mp3")])
         self.music = Sound(bgm, streaming=True)
         self.music.play()
         # ==================================
@@ -46,7 +45,7 @@ class Level_3(oa.View):
         for y in range(900, 600, -90):
             Coin(600, y, group="collectable")
         for i in range(60):
-            Fly(random.randint(50, 1400), random.randint(50, 1250))
+            dog(random.randint(50, 1400), random.randint(50, 1250))
         #================================== 
         # WALLS
         # floor{ 

@@ -8,7 +8,7 @@ def get_asset_path(filename, subfolder="assets"):
         return os.path.join(base, subfolder, filename)
     
 # Import items from our own files
-from sprites import Arrow, err
+from sprites import bliss, err
 
 # This class contains code that is common to ALL levels
 class LevelBase(oa.View):
