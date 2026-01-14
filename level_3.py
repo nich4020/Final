@@ -19,9 +19,15 @@ def get_music_path(filename, subfolder="sounds"):
         base = os.path.dirname(__file__)  # folder where your script lives
         return os.path.join(base, subfolder, filename)
 class Level_3(oa.View):
+    
+
 
     def on_create(self):
-        self.background = oa.Sprite(4000, 1900, get_asset_path("XP.png"), layer=cc.Layers.BACKGROUND, scale=2) # the Background
+        # self.background = 
+        oa.Sprite(4000, 1900, get_asset_path("XP.png"), layer=cc.Layers.BACKGROUND, scale=2) # the Background
+        self.add_sf_map_layers("Maps/Untitled", scale=2)
+        self.add_default_layers()
+
         self.items_collected = 0 # set the collectde items vabl to 0
         # ===============================
         # Randomly choise the BGM and play the music
@@ -31,7 +37,7 @@ class Level_3(oa.View):
         # ==================================
         self.world_camera = oa.Camera() # Create a camera to allow for scrolling
         # ===================================
-        self.background_color = cc.Colors.CHESTNUT # the background coloor
+        self.background_color = cc.Colors.GO_GREEN # the background coloor
         # ===================================
         # Sprites 
         self.player = Player(100, 200)
@@ -45,23 +51,23 @@ class Level_3(oa.View):
         # WALLS
         # floor{ 
         BRIDGE_TILE_WIDTH = 128 # For readability, we use a constant to specify the width of the bridge tile
-        self.create_vwall(790, 600, 5, get_asset_path("Vista.png",  subfolder="images"), scale=0.3)
-        self.create_vwall(0, 50, 100, get_asset_path("Vista.png",  subfolder="images"), scale=0.3)
-        self.create_vwall(900, 800, 8, get_asset_path("Vista.png",  subfolder="images"), scale=0.3)
+        # self.create_vwall(790, 600, 5, get_asset_path("Vista.png",  subfolder="images"), scale=0.3)
+        # self.create_vwall(0, 50, 100, get_asset_path("Vista.png",  subfolder="images"), scale=0.3)
+        # self.create_vwall(900, 800, 8, get_asset_path("Vista.png",  subfolder="images"), scale=0.3)
         
         # Add the bottom bridge platform (20 tiles in a row)
-        for x in range(0, BRIDGE_TILE_WIDTH*345, BRIDGE_TILE_WIDTH):
-            oa.Sprite(x, 20, ":resources:/images/tiles/bridgeB.png", cc.Layers.WALLS)
+        # for x in range(0, BRIDGE_TILE_WIDTH*345, BRIDGE_TILE_WIDTH):
+        #     oa.Sprite(x, 20, ":resources:/images/tiles/bridgeB.png", cc.Layers.WALLS)
         for x in range(0, BRIDGE_TILE_WIDTH*345, BRIDGE_TILE_WIDTH):
             oa.Sprite(x, 3900, ":resources:/images/tiles/bridgeB.png", cc.Layers.WALLS)
         # }
         # platform 
         
         # Add the upper bridge platform (1 tile only)
-        oa.Sprite(800, 150, ":resources:/images/tiles/bridgeA.png", cc.Layers.WALLS)
-        oa.Sprite(1000, 250, ":resources:/images/tiles/bridgeA.png", cc.Layers.WALLS)
-        oa.Sprite(700, 530, ":resources:/images/tiles/bridgeA.png", cc.Layers.WALLS)
-        oa.Sprite(900, 590, ":resources:/images/tiles/bridgeA.png", cc.Layers.WALLS)
+        # oa.Sprite(800, 150, ":resources:/images/tiles/bridgeA.png", cc.Layers.WALLS)
+        # oa.Sprite(1000, 250, ":resources:/images/tiles/bridgeA.png", cc.Layers.WALLS)
+        # oa.Sprite(700, 530, ":resources:/images/tiles/bridgeA.png", cc.Layers.WALLS)
+        # oa.Sprite(900, 590, ":resources:/images/tiles/bridgeA.png", cc.Layers.WALLS)
         # =============================================
     def on_step(self):
         # Make the camera follow the player
