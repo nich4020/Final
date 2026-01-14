@@ -252,4 +252,9 @@ class vista_orb(oa.Sprite):
             self.kill() 
         # # refs.cur_view.world_camera.point_in_view(int(self.x), int(self.y)) == False:
         #     self.kill()
-class 
+class sub(oa.Sprite):
+    def on_create(self):
+        subway = get_asset_path("SUB.png")
+        self.visual = subway
+        self.scale = 0.5
+    

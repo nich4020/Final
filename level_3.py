@@ -6,7 +6,7 @@ import arcade
 from arcade import Sound
 
 from level_base import LevelBase
-from sprites import  dog, BlueBird, Coin, vista_orb
+from sprites import  dog, BlueBird, Coin, vista_orb, sub
 
 # =====================================
 # get the file locaion to ware to find it
@@ -40,6 +40,7 @@ class Level_3(oa.View):
         # ===================================
         # Sprites 
         self.player = Player(100, 200)
+        sub(600, 300, group="collectable")
         oa.Sprite(1050, 700, get_asset_path("日本.png"), group="collectable")
         oa.Sprite(900, 250, get_asset_path("duck.png",  subfolder="images"))
         for y in range(900, 600, -90):
