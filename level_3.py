@@ -6,7 +6,7 @@ import arcade
 from arcade import Sound
 
 from level_base import LevelBase
-from sprites import  dog, BlueBird, Coin, vista_orb, sub
+from sprites import  dog, BlueBird, Coin, vista_orb, sub, Player
 
 # =====================================
 # get the file locaion to ware to find it
@@ -18,6 +18,7 @@ def get_asset_path(filename, subfolder="images"):
 def get_music_path(filename, subfolder="sounds"):
         base = os.path.dirname(__file__)  # folder where your script lives
         return os.path.join(base, subfolder, filename)
+
 class Level_3(oa.View):
     
 
@@ -79,33 +80,7 @@ class Level_3(oa.View):
         self.draw_grid()
 
 
-class Player(oa.Sprite):
 
-    def on_create(self):
-        # ================================================
-        self.visual = (get_asset_path("Windows_xp.jpg"))
-        self.scale = 0.3
-        # ================================
-        # self.layer = cc.Layers.MOVING_GAME_OBJECT
-        self.bind_platformer_directional_keys() # Notice this time, we use the **platformer** directional keys
-        self.enable_physics(gravity=0.01) #This is where we enable gravity for a platformer game
-    def on_step(self):
-        #Handle a collision with a collectable item
-        colliding_item = self.find_colliding("collectable")
-        if colliding_item:
-            self.view.items_collected += 1
-            colliding_item.kill()
-            COIN_SOUND = arcade.load_sound(get_music_path("ding.wav"))
-            self.coin_playback = arcade.play_sound(COIN_SOUND)
-        
-        colliding_enemy = self.find_colliding("enemy")  
-        if colliding_enemy:
-            # reduce health by damage given
-            hurt_SOUND = arcade.load_sound(get_asset_path("chord.wav",  subfolder="sounds"))
-            self.coin_playback = arcade.play_sound(hurt_SOUND)
-            self.health -= colliding_enemy.damage_given
-            self.x = 50
-            self.y = 50
         
 
 oa.run(Level_3, title="moon gravity platformer game")

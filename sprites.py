@@ -5,30 +5,41 @@ import op_arcade.constants_classes as cc
 from op_arcade import refs # refs gives us access to the current level
 from arcade import Sound
 import os 
+import random
 def get_asset_path(filename, subfolder="images"):
         base = os.path.dirname(__file__)  # folder where your script lives
         return os.path.join(base, subfolder, filename)
+    
+def get_music_path(filename, subfolder="sounds"):
+        base = os.path.dirname(__file__)  # folder where your script lives
+        return os.path.join(base, subfolder, filename)
 class Player(oa.Sprite):
-    SPEED = 4
-    MAX_HEALTH = 10
 
     def on_create(self):
-        # Set built-in attributes and called required methods
-        self.visual = get_asset_path("duck.png")
-        # cc.Anims.Players.TopDown.GIRL
-        self.scale = 2
-        self.set_layer(cc.Layers.MOVING_GAME_OBJECTS)
-        self.bind_top_down_directional_keys(Player.SPEED)
-        self.enable_physics()
-
-        # Set our own custom attributes
-        self.health = Player.MAX_HEALTH
-        self.damage_immune = False # Will become True for a short period of time right after the player takes damage
-        self.shoot_direction = "down" # When we shoot an arrow, which way does it go?
-
-        
-
+        # ================================================
+        self.visual = (get_asset_path("Windows_xp.jpg"))
+        self.scale = 0.3
+        # ================================
+        # self.layer = cc.Layers.MOVING_GAME_OBJECT
+        self.bind_platformer_directional_keys() # Notice this time, we use the **platformer** directional keys
+        self.enable_physics(gravity=0.01) #This is where we enable gravity for a platformer game
     def on_step(self):
+        #Handle a collision with a collectable item
+        colliding_item = self.find_colliding("collectable")
+        if colliding_item:
+            self.view.items_collected += 1
+            colliding_item.kill()
+            COIN_SOUND = arcade.load_sound(get_music_path("ding.wav"))
+            self.coin_playback = arcade.play_sound(COIN_SOUND)
+        
+        colliding_enemy = self.find_colliding("enemy")  
+        if colliding_enemy:
+            # reduce health by damage given
+            hurt_SOUND = arcade.load_sound(get_asset_path("chord.wav",  subfolder="sounds"))
+            self.coin_playback = arcade.play_sound(hurt_SOUND)
+            self.health -= colliding_enemy.damage_given
+            self.x = 50
+            self.y = 50
 
         # Every time the player moves, we need to update its shoot direction.
         # Important to note, if we are currently stationary, there is no match below
@@ -41,13 +52,6 @@ class Player(oa.Sprite):
             self.shoot_direction = "down"
         elif self.change_y > 0:
             self.shoot_direction = "up"
-            
-        colliding_item = self.find_colliding("collectable")
-        if colliding_item:
-            self.view.items_collected += 1 # type: ignore
-            colliding_item.kill()
-            COIN_SOUND = arcade.load_sound(get_asset_path("ding.wav", subfolder="sounds"))
-            arcade.play_sound(COIN_SOUND)
 
 
     # This method will be called by enemies when they give us damaage
@@ -257,4 +261,24 @@ class sub(oa.Sprite):
         subway = get_asset_path("SUB.png")
         self.visual = subway
         self.scale = 0.5
-    
+class bread(oa.Sprite):
+
+    def on_create(self):
+        slice = random.choice(get_asset_path("Bread.jpg"), get_asset_path("bread-pictures.jpg"), get_asset_path("milk-bread.jpg"), get_asset_path("sliced-bread.jpg"), get_asset_path("sliced-french-bread.jpg"))
+        jhgfd = slice
+        self.visual = jhgfd
+        self.scale = 0.5
+        self.layer = cc.Layers.MOVING_GAME_OBJECTS
+        self.change_x = 8
+        vista_orb_sOUND = arcade.load_sound("Local/Unit 4/part1/sounds/Windows Shutdown.wav")
+        vista_orb_play = arcade.play_sound(vista_orb_sOUND)
+
+
+    def on_step(self):
+        # If we've gone off screen, remove ourself from the game.
+        # It's important to remember this step, or otherwise the game will eventually
+        # slow down and it's trying to render a bunch of arrows off screen
+        if self.x == 1600:
+            self.kill() 
+        # # refs.cur_view.world_camera.point_in_view(int(self.x), int(self.y)) == False:
+        #     self.kill()
